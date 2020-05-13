@@ -10,5 +10,5 @@ loop:
     add bx, 0x1             ; go to next character
     jmp loop                ; loop
 end:
-    popa                    ; restore registers
-    ret                     ; return
+    popa
+    ret
