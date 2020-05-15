@@ -6,6 +6,7 @@
 - interrupts used to execute higher priority instructions
 - BIOS sets up a table called the interrupt service routines (ISRs)
 - data is passed to interrupt routines through registers
+- BIOS stores boot drive in dl on start so useful to save for later operations
 
 # Syntax and other stuff
 ```
@@ -13,6 +14,13 @@ $           ; Adress of current instruction
 $$          ; Address of the beginning of the current section
 $-$$        ; Length of section
 int 0x10    ; Interrupt for BIOS video service
-            ; Higher byte used for mode
-            ; Lower byte character to print
+            ; Higher byte of ax used for mode
+            ; Lower byte of axcharacter to print
+int 0x13    ; BIOS disk read service
+            ; ah 0x02 for read sector function
+            ; al for number sectors to read
+            ; dl for drive number
+            ; ch for cylinder number
+            ; dh for head number
+            ; cl for sector on disk 
 ```
