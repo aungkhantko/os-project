@@ -8,6 +8,12 @@
 - data is passed to interrupt routines through registers
 - BIOS stores boot drive in dl on start so useful to save for later operations
 
+# Switching to 32-bit protected mode
+- need to set up the Global Descriptor Table (GDT)
+- GDT defines memory segments and their protected mode attributes
+- Required to load a kernel compiled from a higher level language to 32-bit instructions
+- Cannot use BIOS once in 32-bit protected mode
+
 # Syntax and other stuff
 ```
 $           ; Adress of current instruction
