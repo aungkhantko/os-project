@@ -10,5 +10,7 @@ loop:
         add bx, 0x1             ; go to next character
         jmp loop                ; loop
 end:
+        mov al, 0x20
+        int 0x10
         popa
         ret

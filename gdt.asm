@@ -9,12 +9,11 @@
 ; bits 40 - 43          type flags
 ;                       (code, conforming, readable, accessed)
 ; bits 44 - 47          other flags
-;                       (descriptor type, privilege level, present)
+;                       (present, privilege level, descriptor type)
 ; bits 48 - 51          segment limit                       
 ; bits 52 - 55          other flags
-;                       (available for use by system software,
-;                       64-bit code segment, default op size,
-;                       granularity)
+;                       (granularity, 32-bit default
+;                       64-bit segment, AVL)
 ; bits 56 - 63          base address
 gdt_start:
 

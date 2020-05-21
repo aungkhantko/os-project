@@ -13,6 +13,9 @@
 - GDT defines memory segments and their protected mode attributes
 - Required to load a kernel compiled from a higher level language to 32-bit instructions
 - Cannot use BIOS once in 32-bit protected mode
+- Protected mode handles interrupts differently
+- 16-bit interrupt handlers won't work in 32-bit mode
+- Clear interrupt vector table, load global descriptor table, flush old instructions
 
 # Syntax and other stuff
 ```

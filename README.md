@@ -2,6 +2,9 @@
 
 A summer project to build a operating system.
 
+### To Do
+- [ ] Refactor project
+
 ### Goals
 - [ ] 64-bit support
 - [ ] Multi-threaded support
