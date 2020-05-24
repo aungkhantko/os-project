@@ -24,9 +24,7 @@
 
 %include "disk_load.asm"
 %include "gdt.asm"
-%include "print_hex.asm"
 %include "print_string.asm"
-%include "print_string_pm.asm"
 %include "switch_to_pm.asm"
 
 [bits 32]
