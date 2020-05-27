@@ -4,8 +4,6 @@ A summer project to build a operating system. Check notes on more info.
 
 ### To Do
 - [ ] Refactor project
-
-### Goals
 - [ ] File manager
 - [ ] Implement processes 
 - [ ] Multi-threaded support
