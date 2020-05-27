@@ -23,4 +23,4 @@ init_pm:
         mov ebp, 0x90000        ; Update stack
         mov esp, ebp
         
-        call BEGIN_PM 
+        call begin_pm

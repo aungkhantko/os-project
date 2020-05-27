@@ -17,6 +17,16 @@
 - 16-bit interrupt handlers won't work in 32-bit mode
 - Clear interrupt vector table, load global descriptor table, flush old instructions
 
+# Summary
+- OS boots into 16-bit real mode which exists on all x86 processors, and then switch into 
+protected mode (32-bit in our case so far) before executing kernel code. Although protected mode 
+prevents us from using BIOS interrupts, it enables the CPU to use more memory and set protection 
+on memory. First of all, kernel code is loaded into memory. Next, interrupts are disabled and the 
+GDT is loaded. Currently the GDT has two segments descriptors (code and data). The GDT is currently 
+very simple and a higher level language will be used later to build upon it. After the GDT has 
+been set up, a control register is set to switch into 32-bit mode and starts executing kernel code
+which was earlier loaded into memory.
+
 # Syntax and other stuff
 ```
 $           ; Adress of current instruction

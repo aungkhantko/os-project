@@ -1,6 +1,6 @@
 # OS project
 
-A summer project to build a operating system.
+A summer project to build a operating system. Check notes on more info.
 
 ### To Do
 - [ ] Refactor project
