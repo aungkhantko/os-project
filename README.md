@@ -6,8 +6,10 @@ A summer project to build a operating system. Check notes on more info.
 - [ ] Refactor project
 
 ### Goals
-- [ ] 64-bit support
+- [ ] File manager
+- [ ] Implement processes 
 - [ ] Multi-threaded support
+- [ ] 64-bit support
 
 # References
 [https://wiki.osdev.org](https://wiki.osdev.org)  
