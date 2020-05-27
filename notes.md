@@ -27,6 +27,13 @@ very simple and a higher level language will be used later to build upon it. Aft
 been set up, a control register is set to switch into 32-bit mode and starts executing kernel code
 which was earlier loaded into memory.
 
+# More notes and questions on stuff (mostly to self)
+- In a higher level operating system each process has its own set of registers? Segment registers
+allow us to access a wide range of memory? If a GDT has only one code segment descriptor and one
+data segment register, the process can only have one code and one data registers . However, different
+proccesses can have their own and thus access different parts of memory. (More into LDT stuff?) 
+[https://stackoverflow.com/questions/37554399/what-is-the-use-of-defining-a-global-descriptor-table] (https://stackoverflow.com/questions/37554399/what-is-the-use-of-defining-a-global-descriptor-table)
+
 # Syntax and other stuff
 ```
 $           ; Adress of current instruction
