@@ -1,16 +1,28 @@
-all: kernel.bin boot_sector.bin
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h)
 
-kernel.bin: kernel_entry.o kernel.o
+OBJ = ${C_SOURCES:.c=.o}
+
+all: os-image
+
+run: all
+	qemu-system-i386 os-image
+
+os-image: boot/boot_sector.bin kernel.bin
+	cat $^ > os-image
+
+kernel.bin: kernel/kernel_entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
 
-kernel.o : kernel.c
-	i386-elf-gcc -ffreestanding -c $^ -o $@
+%.o: %.c ${HEADERS}
+	i386-elf-gcc -ffreestanding -c $< -o $@
 
-kernel_entry.o : kernel_entry.asm
-	nasm $^ -f elf -o $@
+%.o: %.asm
+	nasm $< -f elf -o $@
 
-boot_sector.bin: boot_sector.asm
-	nasm $^ -f bin -o $@
+%.bin: %.asm
+	nasm $< -f bin -o $@
 
 clean:
-	rm *.bin *.o
+	rm -rf *.bin *.o
+	rm -rf kernel/*.o boot/*.bin drivers/*.o
