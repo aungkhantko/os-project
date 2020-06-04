@@ -6,10 +6,10 @@ OBJ = ${C_SOURCES:.c=.o}
 all: os-image
 
 run: all
-	qemu-system-i386 -fda os-image
+	qemu-system-i386 -fda os-image.bin
 
 os-image: boot/boot_sector.bin kernel.bin
-	cat $^ > os-image
+	cat $^ > os-image.bin
 
 kernel.bin: kernel/kernel_entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
