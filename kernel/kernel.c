@@ -1,4 +1,7 @@
+#include "../drivers/screen.h"
+
 void main() {
-        char* video_memory = (char*) 0xb8000;
-        *video_memory = '9';
+        clear_screen();
+        print_char('A', 0, 0, 0);
+        print_char('A', 0, 1, 0);
 }
