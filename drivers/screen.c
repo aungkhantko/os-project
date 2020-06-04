@@ -2,7 +2,7 @@
 #include "screen.h"
 
 void clear_screen() {
-        unsigned char *mem = (unsigned char*) VIDEO_ADDRESS;
+        unsigned char *mem = (unsigned char *) VIDEO_ADDRESS;
 
         int size = MAX_ROWS * MAX_COLS;
         for (int i = 0; i < size; i += 2) {
@@ -14,7 +14,7 @@ void clear_screen() {
 }
 
 void print_char(char c, int row, int col, char attr) {
-        unsigned char *mem = (unsigned char*) VIDEO_ADDRESS;
+        unsigned char *mem = (unsigned char *) VIDEO_ADDRESS;
 
         if (!attr) attr = WHITE_ON_BLACK;
 
@@ -24,11 +24,30 @@ void print_char(char c, int row, int col, char attr) {
         else
                 offset = get_cursor_offset();
 
-        mem[offset] = c;
-        mem[offset+1] = attr;
+        if (c == '\n') {
+                row = offset / (2 * MAX_COLS) + 1;
+                offset = get_screen_offset(row, 0);
+        } else {
+                mem[offset] = c;
+                mem[offset+1] = attr;
+                offset += 2;
+        }
 
-        offset += 2;
         set_cursor(offset);
+}
+
+void print_at(char *string, int row, int col) {
+        if (col >= 0 && row >= 0)
+                set_cursor(get_screen_offset(row, col));
+
+        int i = 0;
+        while (string[i] != 0) {
+                print_char(string[i++], row, col, WHITE_ON_BLACK);
+        }
+}
+
+void print(char *string) {
+        print_at(string, -1, -1);
 }
 
 int get_cursor_offset() {
@@ -49,5 +68,5 @@ void set_cursor(int offset) {
 }
 
 int get_screen_offset(int row, int col) {
-        return (row * MAX_ROWS + col) * 2;
+        return (row * MAX_COLS + col) * 2;
 }
