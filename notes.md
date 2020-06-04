@@ -17,6 +17,15 @@
 - 16-bit interrupt handlers won't work in 32-bit mode
 - Clear interrupt vector table, load global descriptor table, flush old instructions
 
+# I/O
+- memory mapped input/output
+- direct memory access
+
+# Screen
+- memory mapped
+- the screen has two internal registers, the control register and the data register
+which can be used to query location of the cursor
+
 # Summary
 - OS boots into 16-bit real mode which exists on all x86 processors, and then switch into 
 protected mode (32-bit in our case so far) before executing kernel code. Although protected mode 
