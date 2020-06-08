@@ -14,3 +14,4 @@ void print(char *string);
 void set_cursor(int offset);
 int get_cursor_offset();
 int get_screen_offset(int row, int col);
+int scrolling(int offset);

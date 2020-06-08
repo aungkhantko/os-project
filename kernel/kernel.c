@@ -1,7 +1,7 @@
 #include "../drivers/screen.h"
 
-void main() {
+void main() 
+{
         clear_screen();
-        print("String1\n");
-        print("String2\n");
+        print("Kernel Loaded\n");
 }
