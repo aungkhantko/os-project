@@ -1,17 +1,13 @@
+CFLAGS=-O2 -g -ffreestanding -Wall -Wextra
+LIBS=-nostdlib -lk -lgcc
+
+KERNEL_OBJS=kernel/kernel.o
+
+OBJS=crti.o crtbegin.o $(KERNEL_OBJS) crtend.o crtn.o
+
+LINK_LIST=crti.o crtbegin.o $(KERNEL_OBJS) $(LIBS) crtend.o crtn.o
+
 all: os-image
-	make clean
 
-run: all
-	qemu-system-i386 -kernel os-image
-
-os-image: boot.o kernel.o
-	i686-elf-gcc -T boot/linker.ld -o os-image -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
-
-boot.o: boot/boot.s
-	i686-elf-as boot/boot.s -o boot.o
-
-kernel.o: kernel/kernel.c
-	i686-elf-gcc -c kernel/kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-
-clean:
-	rm -rf *.o
+os-image: $(OBJS) boot/linker.ld
+	i686-elf-gcc -T boot/linker.ld -o $@ $(CFLAGS) $(LINK_LIST)
