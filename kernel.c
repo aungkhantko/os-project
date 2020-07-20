@@ -51,6 +51,12 @@ size_t strlen(const char* str)
 		len++;
 	return len;
 }
+
+void memcpy(char* dest, char* source, size_t size)
+{
+	for (size_t i = 0; i < size; i++)
+		*(dest + i) = *(source + i);
+}
  
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -85,13 +91,18 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 	terminal_buffer[index] = vga_entry(c, color);
 }
  
-void terminal_putchar(char c) 
+void terminal_putchar(char c)
 {
-	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-	if (++terminal_column == VGA_WIDTH) {
+	if (c > 0x1f)
+		terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+	if (++terminal_column == VGA_WIDTH || c == '\n') {
 		terminal_column = 0;
-		if (++terminal_row == VGA_HEIGHT)
-			terminal_row = 0;
+		if ((terminal_row + 1) == VGA_HEIGHT)
+			memcpy((char*) terminal_buffer,
+					(char*) terminal_buffer + VGA_WIDTH * 2,
+					VGA_WIDTH * (VGA_HEIGHT - 1));
+		else
+			++terminal_row;
 	}
 }
  
@@ -111,6 +122,5 @@ void kernel_main(void)
 	/* Initialize terminal interface */
 	terminal_initialize();
  
-	/* Newline support is left as an exercise. */
 	terminal_writestring("Hello, kernel World!\n");
 }
