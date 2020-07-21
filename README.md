@@ -3,11 +3,8 @@
 A summer project to build a operating system. Check notes on more info.
 
 ### To Do
-- [ ] Refactor project
-- [ ] File manager
-- [ ] Implement processes 
-- [ ] Multi-threaded support
-- [ ] 64-bit support
+- [ ] GDT
+- [ ] Paging
 
 # References
 [https://wiki.osdev.org](https://wiki.osdev.org)  
