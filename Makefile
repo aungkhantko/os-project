@@ -11,9 +11,19 @@ OBJS=init/gdt.o boot/boot.o kernel/kernel.o
 LINKER=boot/linker.ld
 LINK_LIST=$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJS) $(CRTEND_OBJ) $(CRTN_OBJ)
 
-all: os-image
+all: os-image.iso
 
-os-image: boot/linker.ld $(LINK_LIST)
+run: os-image.iso
+	qemu-system-i386 -cdrom $<
+
+
+os-image.iso: os-image.bin grub.cfg
+	mkdir -p isodir/boot/grub
+	cp os-image.bin isodir/boot/os-image.bin
+	cp grub.cfg isodir/boot/grub/grub.cfg
+	grub-mkrescue -o os-image.iso isodir
+
+os-image.bin: boot/linker.ld $(LINK_LIST)
 	$(CC) -T $(LINKER) -o $@ $(CFLAGS) $(LINK_LIST) $(LDFLAGS)
 
 %.o: %.c
