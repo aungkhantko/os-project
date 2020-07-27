@@ -7,3 +7,9 @@
 > (https://wiki.osdev.org/System\_V\_ABI)
 
 `crt{i, begin, end, n}.o` provide initialization and termination functions which will be linked in and called from `boot.o`.
+
+> The GRUB bootloader to bootload your kernel using the Multiboot boot protocol that loads us into 32-bit protected mode with paging disabled.
+>
+> The ELF as the executable format that gives us control of where and how the kernel is loaded.
+>
+> (https://wiki.osdev.org/Bare\_Bones)
