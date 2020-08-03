@@ -34,10 +34,10 @@ _start:
 .size _start, . - _start
 
 .global gdt_flush
-.extern gp
+.extern gdtptr 
 gdt_flush:
 	cli
-	lgdt (gp)
+	lgdt (gdtptr)
 	mov $0x10, %ax
 	mov %ax, %ds
 	mov %ax, %es
@@ -46,4 +46,10 @@ gdt_flush:
 	mov %ax, %ss
 	jmp $0x08,$flush
 flush:
+	ret
+
+.global idt_load
+extern idtptr
+idt_load:
+	lidt (idtprt)
 	ret
