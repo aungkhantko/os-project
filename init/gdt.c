@@ -28,7 +28,7 @@ struct gdt_ptr {
 
 /* Null segment, code segment and data segment */
 struct gdt_entry gdt[3];
-struct gdt_ptr gp;
+struct gdt_ptr gdtptr;
 
 extern void gdt_flush();
 
@@ -46,8 +46,8 @@ void gdt_set_descriptor(int num, unsigned long base, unsigned long limit,
 }
 
 void gdt_install() {
-	gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
-	gp.base = &gdt;
+	gdtptr.limit = (sizeof(struct gdt_entry) * 3) - 1;
+	gdtptr.base = &gdt;
 
 	/* Null descriptor */
 	gdt_set_descriptor(0, 0, 0, 0, 0);

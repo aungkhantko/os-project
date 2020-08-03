@@ -1,3 +1,5 @@
+#include "../kernel/system.h"
+
 struct idt_entry {
 	unsigned short offset_low;
 	unsigned short selector;
@@ -9,7 +11,7 @@ struct idt_entry {
 struct idt_ptr {
 	unsigned short limit;
 	unsigned int base;
-}
+} __attribute__((packed));
 
 struct idt_entry idt[256];
 struct idt_ptr idtptr;

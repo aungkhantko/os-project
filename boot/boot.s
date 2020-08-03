@@ -49,7 +49,7 @@ flush:
 	ret
 
 .global idt_load
-extern idtptr
+.extern idtptr
 idt_load:
-	lidt (idtprt)
+	lidt (idtptr)
 	ret
