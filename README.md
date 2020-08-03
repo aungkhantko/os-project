@@ -3,7 +3,8 @@
 A summer project to build a operating system. Check notes on more info.
 
 ### To Do
-- [ ] GDT
+- [ ] Cleanup
+- [X] GDT
 - [ ] Paging
 
 # References
