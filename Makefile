@@ -7,11 +7,12 @@ CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 CRTN_OBJ=init/crtn.o
 
-OBJS=kernel/system.o init/isr.o init/gdt.o init/idt.o boot/boot.o kernel/kernel.o
+OBJS=kernel/system.o boot/isr.o boot/gdt.o boot/idt.o boot/boot.o kernel/kernel.o
 LINKER=boot/linker.ld
 LINK_LIST=$(CRTI_OBJ) $(CRTBEGIN_OBJ) $(OBJS) $(CRTEND_OBJ) $(CRTN_OBJ)
 
 all: os-image.iso
+	make clean
 
 run: os-image.iso
 	qemu-system-i386 -cdrom $<
