@@ -3,18 +3,39 @@
 ; (segment 0, address 0x7c00)
 
 [org 0x7c00]	; code loaded to 0x7c00
-mov bx, BOOT_MSG
-call print_string
+	mov [BOOT_DRIVE], dl	; Save drive number
+				; BIOS saves drive number to dl by default
 
-mov ax, 0x1337
-mov bx, ax
-call print_hex
-jmp $
+	mov bp, 0x8000		; Set up stack at 0x8000
+	mov sp, bp		; Set stack pointer to base pointer
+
+	mov dh, 2		; Number of sectors to read
+	mov dl, [BOOT_DRIVE]	; Drive number
+	mov bx, 0x9000		; Memory to read to
+	call disk_load		; Call disk_load
+
+	mov bx, [0x9000]	; test disk_load 0xbaba
+	call print_hex
+
+	mov bx, [0x9000 + 512]	; test disk_load 0xdede
+	call print_hex
+
+	mov bx, BOOT_MSG	; print boot message
+	call print_string
+
+	jmp $
 
 %include "print.asm"
+%include "disk.asm"
+
+BOOT_DRIVE:
+	db 0
 
 BOOT_MSG:
 	db "Booting Operating System in 16-bit real mode", 0
 
 times 510-($-$$) db 0
 dw 0xaa55	; boot signature
+
+times 256 dw 0xbaba
+times 256 dw 0xdede
