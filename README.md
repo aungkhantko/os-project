@@ -17,6 +17,15 @@ Real mode uses segmentation to address memory in the form A:B where `physical ad
 
 Protected mode also uses logical addresses in the form A:B, however, A is a selector. A selector is an offset in the Global Descriptor Table, where each descriptor describes the properties of each segment.
 
-The GDT is used by the kernel? Processes have their own table known as the Local Descriptor Table, separate from each other. 
-
-Another form of memory management is Paging
+> "The memory management facilities of the IA-32 architecture are divided into two parts: segmentation and paging.
+Segmentation provides a mechanism of isolating individual code, data, and stack modules so that multiple
+programs (or tasks) can run on the same processor without interfering with one another. Paging provides a mech-
+anism for implementing a conventional demand-paged, virtual-memory system where sections of a program’s
+execution environment are mapped into physical memory as needed. Paging can also be used to provide isolation
+between multiple tasks. When operating in protected mode, some form of segmentation must be used. There is
+no mode bit to disable segmentation. The use of paging, however, is optional."
+> "segmentation converts logical addresses to linear addresses. Paging (or linear-address
+translation) is the process of translating linear addresses so that they can be used to access memory or I/O
+devices. Paging translates each linear address to a physical address and determines, for each translation, what
+accesses to the linear address are allowed (the address’s access rights) and the type of caching used for such
+accesses (the address’s memory type)" - Intel Manual
