@@ -27,6 +27,7 @@
 
 %include "print.asm"
 %include "disk.asm"
+%include "vga.asm"
 
 BOOT_DRIVE:
 	db 0
