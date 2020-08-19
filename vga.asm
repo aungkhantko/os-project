@@ -13,6 +13,7 @@ loop_prints_vga:
 	cmp al, 0		; compare to end of string
 	je end_prints_vga	; jump to end
 
+	mov [edx], ax
 	add ebx, 1		; get next character
 	add edx, 2		; mov to next cell in memory
 

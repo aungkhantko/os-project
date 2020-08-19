@@ -23,17 +23,29 @@
 	mov bx, BOOT_MSG	; print boot message
 	call print_string
 
+	call switch_to_pm
+
 	jmp $
 
 %include "print.asm"
 %include "disk.asm"
 %include "vga.asm"
+%include "gdt.asm"
+%include "switch.asm"
+
+protected_mode:
+	mov ebx, BOOT_MSG32
+	call print_string_vga
+	jmp $
 
 BOOT_DRIVE:
 	db 0
 
 BOOT_MSG:
 	db "Booting Operating System in 16-bit real mode", 0
+
+BOOT_MSG32:
+	db "Booting into 32-bit protected mode", 0
 
 times 510-($-$$) db 0
 dw 0xaa55	; boot signature
